@@ -48,7 +48,7 @@ class ProductManager {
         await fs.writeFile(this.ruta, JSON.stringify(this.#products))
     }
 
-    /* en la verificacion no esta thumbnail porque todavia no manejamos imagenes asi no se traba. Cuando las pongamos pondre la validacion*/
+    
     async addProduct({category, title, description, thumbnail, stock, price}) {
         if (!category || !title || !description || !stock || !price) {
             throw new Error('Todos los campos son obligatorios');
@@ -152,32 +152,8 @@ const prod15 = await ProdMan.addProduct({
     code: "domo123",
     stock: 10,
 })
-/*
-//mostrar un producto
-console.log(prod1)
-*/
-// mostrar todos los productos
 console.log(await ProdMan.getProducts())
-/*
-//buscar un producto por Id
-console.log(await ProdMan.getProductById(1))
 
-//buscar un producto que no existe por id
-console.log(await ProdMan.getProductById(30))
-
-
-// con updateProduct cambiar solo el stock en prod2, mostrado antes y despues
-
-console.log(await ProdMan.getProductById(2))
-await ProdMan.updateProduct(2,{stock: 60})
-console.log(await ProdMan.getProductById(2))
-
-//con deleteProduct borrar el prod15 con id 5, mostrado antes y despues
-console.log(prod15)
-await ProdMan.deleteProduct(5)
-console.log(prod15)
-
-*/
 }
 
 main()
