@@ -1,15 +1,12 @@
-import { promises as fs } from 'fs'
+const {promises: fs} = require('fs')
 
 class Product {
     
-    constructor({id, category, object, title, description, thumbnail, code, stock, price}){
+    constructor({id, category, title, thumbnail,stock, price}){
         this.id = id
         this.category = category
-        this.object = object
         this.title = title
-        this.description = description
-        this.thumbnail = thumbnail 
-        this.code = code 
+        this.thumbnail = thumbnail  
         this.stock = stock 
         this.price = price
     }
@@ -52,13 +49,13 @@ class ProductManager {
     }
 
     /* en la verificacion no esta thumbnail porque todavia no manejamos imagenes asi no se traba. Cuando las pongamos pondre la validacion*/
-    async addProduct({category, object, title, description, thumbnail, code, stock, price}) {
-        if (!category || !object || !title || !description || !code || !stock || !price) {
+    async addProduct({category, title, description, thumbnail, stock, price}) {
+        if (!category || !title || !description || !stock || !price) {
             throw new Error('Todos los campos son obligatorios');
         }
         
         const id = ProductManager.#generarNewId()
-        const product = new Product({id, category, object, title, description, thumbnail, code, stock, price})
+        const product = new Product({id, category, title, description, thumbnail, stock, price})
         await this.#readProducts()
         this.#products.push(product)
         await this.#writeProducts()
